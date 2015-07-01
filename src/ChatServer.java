@@ -5,7 +5,7 @@ import java.util.Vector;
 
 
 public class ChatServer {
-	static Vector ClientSockets;
+	static Vector ClientSockets; //Vector: growable or shrinkable array
 	static Vector LoginNames;
 	
 	ChatServer() throws IOException{
@@ -36,7 +36,7 @@ public class ChatServer {
 			
 			String LoginName = din.readUTF();
 			LoginNames.add(LoginName);
-			ClientSockets.add(ClientSockets);
+			ClientSockets.add(ClientSocket);
 			
 			start();
 		}
@@ -46,13 +46,13 @@ public class ChatServer {
 				try {
 					String msgFromClient = din.readUTF();
 					StringTokenizer st = new StringTokenizer(msgFromClient);
-					String loginName = st.nextToken();
-					String msgType = st.nextToken();
+					String LoginName = st.nextToken();
+					String MsgType = st.nextToken();
 					
-					for(int i = 0; i < loginName.length(); i++) {
+					for(int i = 0; i < LoginName.length(); i++) {
 						Socket pSocket = (Socket) ClientSockets.elementAt(i);
 						DataOutputStream pout = new DataOutputStream(pSocket.getOutputStream());
-						pout.writeUTF(loginName + " has logged in"); 
+						pout.writeUTF(LoginName + " has logged in"); 
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
